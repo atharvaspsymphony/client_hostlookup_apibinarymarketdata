@@ -219,10 +219,9 @@ class XTSConnect(XTSCommon):
         try:
             params = {
                 "accesspassword":str(self._accesspassword),
-                "version":str( self._version)
+                "version":str(self._version)
             }
             response = self._post("hostlookup.login", json.dumps(params))
-            print(response)
             if "uniqueKey" in response['result']:
                 self.connectionString = response['result']['connectionString']
                 self.uniqueKey = response['result']['uniqueKey']
@@ -1012,14 +1011,11 @@ class XTSConnect(XTSCommon):
                 "source": self.source
             }
             response = self._post("market.login", params)
-            print(response['result'])
             if "token" in response['result']:
-                print("Token exist")
-                self._set_common_variables(response['result']['token'], response['result']['userID'],False)
+                self._set_common_variables(response['result']['token'], response['result']['userID'])
             return response 
         except Exception as e:
-            print("In exce")
-           # return response
+           return response
 
     def get_config(self):
         try:
@@ -1056,7 +1052,7 @@ class XTSConnect(XTSCommon):
 
     def get_master(self, exchangeSegmentList):
         try:
-            params = {"exchangeSegmentList": exchangeSegmentList}
+            params = {'exchangeSegmentList': exchangeSegmentList}
             response = self._post('market.instruments.master', json.dumps(params))
             return response
         except Exception as e:
@@ -1194,7 +1190,7 @@ class XTSConnect(XTSCommon):
             headers.update({'Content-Type': 'application/json'})
             url = urljoin(self._default_root_uri, uri)
           
-        if self.token:
+        if self.token is not None:
             # set authorization header
             headers.update({'Content-Type': 'application/json', 'Authorization': self.token})
 

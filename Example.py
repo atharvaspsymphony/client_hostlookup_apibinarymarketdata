@@ -372,7 +372,7 @@ instruments = [
 """Get Quote Request"""
 response = xt.get_quote(
     Instruments=instruments,
-    xtsMessageCode=1504,
+    xtsMessageCode=1502,
     publishFormat='JSON')
 print('Quote :', response)
 

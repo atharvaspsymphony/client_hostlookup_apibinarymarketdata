@@ -62,7 +62,7 @@ class OrderSocket_io(socketio.Client):
         configParser = configparser.RawConfigParser()
         configFilePath = os.path.join(currDirMain, 'config.ini')
         configParser.read(configFilePath)
-        self.port = configParser.get('root_url', 'root').strip()
+        self.port = configParser.get('root_url', 'hostlookupurl').strip()
         # self.socketioPath = "/"+connectionString.split("/")[-1]+"/socket.io"
         
 
@@ -80,6 +80,10 @@ class OrderSocket_io(socketio.Client):
         
         port = f'{connectionString}/?token=' 
         self.connection_url = port + self.token + '&userID=' + self.userID + "&apiType=INTERACTIVE"
+        print("connection_url:", self.connection_url)
+        print("socketioPath:", self.socketioPath)
+
+        
 
     def connect(self, headers={}, transports='websocket', namespaces=None, socketio_path='/socket.io',
                 verify=False):
